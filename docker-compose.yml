@@ -11,7 +11,7 @@ services:
       - "443:443/tcp"
     environment:
       - TZ=Europe/Amsterdam
-      - ServerIP="192.168.2.15"
+      - ServerIP=192.168.2.15s\
     volumes:
        - '/mnt/Raspberry/pihole/etc-pihole/:/etc/pihole/'
        - '/mnt/Raspberry/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
