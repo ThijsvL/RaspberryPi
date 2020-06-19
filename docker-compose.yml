@@ -30,7 +30,7 @@ services:
         - PGID=1000
         - MEM_LIMIT=512M
     volumes:
-        - /mnt/Raspberry/unificonfig/config
+        - /mnt/Raspberry/unificonfig:/config
     ports:
         - 3478:3478/udp
         - 10001:10001/udp
