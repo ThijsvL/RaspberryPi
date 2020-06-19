@@ -1,0 +1,39 @@
+version: "3"
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    environment:
+      TZ: 'Europe/Amsterdam'
+    volumes:
+       - '/mnt/Raspberry/pihole/etc-pihole/:/etc/pihole/'
+       - '/mnt/Raspberry/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+  unifi-controller:
+    image: linuxserver/unifi-controller
+    container_name: unifi-controller
+    privileged: true
+    environment:
+        - PUID=1000
+        - PGID=1000
+        - MEM_LIMIT=512M
+    volumes:
+        - /mnt/Raspberry/unificonfig/config
+    ports:
+        - 3478:3478/udp
+        - 10001:10001/udp
+        - 8080:8080
+        - 8443:8443
+    restart: unless-stopped
