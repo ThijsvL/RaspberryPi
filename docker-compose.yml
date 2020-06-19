@@ -39,3 +39,12 @@ services:
         - 8080:8080
         - 8443:8443
     restart: unless-stopped
+  unifi-poller:
+    restart: unless-stopped
+    image: golift/unifi-poller:${POLLER_TAG}
+    ports:
+        - 9130:9130
+    environment:
+        - UP_UNIFI_DEFAULT_USER=${UNIFI_USER}
+        - UP_UNIFI_DEFAULT_PASS=${UNIFI_PASS}
+        - UP_UNIFI_DEFAULT_URL=${UNIFI_URL}
